@@ -89,10 +89,10 @@
 
   /* ---------- hero ---------- */
   .hero{
-    display:grid;grid-template-columns:1.1fr 1fr;gap:48px;
-    align-items:center;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
     padding:36px 0 64px;
   }
+  .hero > div{max-width:640px;}
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;
     background:var(--parchment);
@@ -112,7 +112,7 @@
     color:var(--ink-soft);font-size:1.08rem;line-height:1.6;
     margin:18px 0 26px;max-width:46ch;
   }
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
     padding:14px 26px;border-radius:14px;
@@ -130,49 +130,7 @@
   }
   .fine{color:var(--ink-soft);font-size:.82rem;margin-top:12px;}
 
-  /* ---------- hero illustration ---------- */
-  .scene{position:relative;aspect-ratio:1/1;max-width:420px;margin:0 auto;}
-  .scene::before{
-    content:"";position:absolute;inset:0;
-    background:radial-gradient(closest-side, rgba(255,143,191,0.28), rgba(169,143,214,0.14) 60%, transparent 75%);
-    filter:blur(6px);
-    z-index:0;
-  }
-  .stall{
-    position:absolute;inset:8% 4% 4% 4%;
-    background:var(--card);
-    border-radius:28px;
-    box-shadow:0 16px 40px -10px rgba(232,101,156,0.45), 0 4px 14px -4px rgba(0,0,0,0.4);
-    border:1.5px solid rgba(255,143,191,0.4);
-    display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-    padding:26px 20px 22px;
-    overflow:hidden;
-    z-index:1;
-  }
-  .stall::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:44%;
-    background:repeating-linear-gradient(115deg,var(--rose) 0 34px, var(--lav) 34px 68px);
-    border-radius:28px 28px 60% 60%/28px 28px 40px 40px;
-  }
-  .stall .crates{
-    position:relative;display:flex;gap:12px;align-items:flex-end;margin-top:14px;z-index:1;
-  }
-  .crate{
-    width:64px;border-radius:12px;
-    box-shadow:0 6px 16px -6px rgba(0,0,0,.35);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.6rem;
-  }
-  .crate.a{height:78px;background:var(--rose);}
-  .crate.b{height:98px;background:var(--clay);}
-  .crate.c{height:70px;background:var(--sky);}
-  .sparkle{position:absolute;font-size:1.4rem;animation:float 5s ease-in-out infinite;}
-  .sparkle.s1{top:4%;left:6%;animation-delay:0s;}
-  .sparkle.s2{top:14%;right:2%;animation-delay:1.2s;font-size:1.1rem;}
-  .sparkle.s3{bottom:8%;left:-2%;animation-delay:2.1s;font-size:1.2rem;}
-  .sparkle.s4{top:-4%;right:22%;animation-delay:0.6s;font-size:1rem;animation-duration:6s;}
-
-  /* sparkles scattered loosely around other sections of the page */
+  /* sparkles scattered loosely around the page */
   .drift{position:relative;}
   .drift-sparkle{
     position:absolute;font-size:1.15rem;opacity:.6;
@@ -263,8 +221,6 @@
   .footer-support svg{width:16px;height:16px;flex:none;}
 
   @media (max-width:760px){
-    .hero{grid-template-columns:1fr;gap:32px;}
-    .hero .scene{order:-1;max-width:280px;}
     .steps,.cats,.cmds{grid-template-columns:1fr;}
     nav{padding:18px 0;}
   }
@@ -278,7 +234,13 @@
     <div class="brand"><span class="brand-badge">🧸</span> Palia Trade Post</div>
   </nav>
 
-  <section class="hero">
+  <section class="hero drift">
+    <span class="drift-sparkle" style="top:6%;left:2%;animation-delay:0s;">✨</span>
+    <span class="drift-sparkle pastel" style="color:var(--rose);top:2%;right:6%;animation-delay:1.4s;font-size:1rem;">★</span>
+    <span class="drift-sparkle" style="bottom:10%;left:8%;animation-delay:2.5s;font-size:1.1rem;">💫</span>
+    <span class="drift-sparkle pastel" style="color:var(--lav);top:40%;right:1%;animation-delay:.8s;font-size:.9rem;">★</span>
+    <span class="drift-sparkle" style="bottom:0%;right:20%;animation-delay:3.1s;">⭐</span>
+    <span class="drift-sparkle pastel" style="color:var(--sky);top:16%;left:22%;animation-delay:1.9s;font-size:.85rem;">★</span>
     <div>
       <span class="eyebrow">🐾 A Discord bot for Palia traders</span>
       <h1>Stop shouting your <em>have/want</em> list in chat.</h1>
@@ -288,19 +250,6 @@
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
       <p class="fine">Free · Works on any server · No setup required</p>
-    </div>
-    <div class="scene">
-      <span class="sparkle s1">✨</span>
-      <span class="sparkle s2">💫</span>
-      <span class="sparkle s3">⭐</span>
-      <span class="sparkle s4">✨</span>
-      <div class="stall">
-        <div class="crates">
-          <div class="crate a">🧸</div>
-          <div class="crate b">🥔</div>
-          <div class="crate c">🏺</div>
-        </div>
-      </div>
     </div>
   </section>
 
