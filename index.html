@@ -171,7 +171,7 @@
   .step p{color:var(--ink-soft);font-size:.95rem;line-height:1.55;margin:0;}
 
   /* ---------- categories ---------- */
-  .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
   .cat{
     border-radius:18px;padding:22px;color:#fff;
     display:flex;flex-direction:column;gap:6px;
@@ -179,13 +179,22 @@
   }
   .cat.plush{background:linear-gradient(150deg,#FF9AC7,#E8659C);}
   .cat.pod{background:linear-gradient(150deg,#E5B27A,#C8863F);}
-  .cat.artifact{background:linear-gradient(150deg,#9FC1F2,#6C93D6);}
+  .cat.elderwood{background:linear-gradient(150deg,#8FE0A8,#4E9E65);}
+  .cat.rh{background:linear-gradient(150deg,#C9AEF2,#8F5FD1);}
   .cat .emoji{font-size:1.7rem;}
   .cat b{font-family:'Baloo 2';font-size:1.05rem;}
   .cat span{font-size:.85rem;opacity:.92;}
 
   /* ---------- commands ---------- */
-  .cmds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .cmds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
+
+  /* ---------- per-step demo clips ---------- */
+  .step-clip{
+    margin-top:16px;border-radius:14px;overflow:hidden;
+    border:1px solid var(--line);background:var(--cream);
+    aspect-ratio:16/10;
+  }
+  .step-clip video{display:block;width:100%;height:100%;object-fit:cover;}
   .cmd{
     background:var(--card);border:1px solid var(--line);border-radius:16px;
     padding:20px;
@@ -244,9 +253,9 @@
     <div>
       <span class="eyebrow">🐾 A Discord bot for Palia traders</span>
       <h1>Stop shouting your <em>have/want</em> list in chat.</h1>
-      <p>List what you're offering and what you're after — Plushies, Potato Pods and Artifacts alike — and Palia Trade Post finds the match, pings both of you, and opens a thread to sort out the trade.</p>
+      <p>List what you're offering and what you're after — Plushies, Potato Pods, Elderwood Relics and RH Relics alike — and Palia Trade Post finds a real two-way match, opens a private thread just for the two of you, and cleans everything up once you're done.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1549725979956486215&permissions=326417639424&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener">🧸 Add to your server</a>
+        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1549725979956486215&permissions=395137116160&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener">🧸 Add to your server</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
       <p class="fine">Free · Works on any server · No setup required</p>
@@ -265,17 +274,32 @@
       <div class="step">
         <div class="step-num">1</div>
         <h3>Post your list</h3>
-        <p>Run <code>/trade</code> and pick up to 3 items you want and 3 you're offering, straight from autocomplete — no typos, no guessing names.</p>
+        <p>Run <code>/trade</code> and pick up to 5 items you want and 5 you're offering, straight from autocomplete — no typos, no guessing names. Run it again anytime to add more, nothing gets overwritten.</p>
+        <div class="step-clip">
+          <video autoplay muted loop playsinline>
+            <source src="step1.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <h3>Get matched instantly</h3>
-        <p>The moment someone else's list lines up with yours, you're both pinged in a new thread — with images of exactly what's changing hands.</p>
+        <p>The moment there's a real two-way match — you have what they want, and they have what you want — you're both pinged in a private thread only the two of you can see, with images of exactly what's changing hands.</p>
+        <div class="step-clip">
+          <video autoplay muted loop playsinline>
+            <source src="step2.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <h3>Trade &amp; close it out</h3>
-        <p>Sort the trade out in-game, then tap <strong>Mark as completed</strong> — the items clear from both your lists and the thread wraps up.</p>
+        <p>Sort the trade out in-game, then tap <strong>Mark as completed</strong> — the items clear from both your lists, and the thread and your original posts disappear automatically.</p>
+        <div class="step-clip">
+          <video autoplay muted loop playsinline>
+            <source src="step3.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
   </section>
@@ -286,12 +310,13 @@
     <div class="section-head">
       <span class="kicker">Full catalog</span>
       <h2>Every collectible, covered</h2>
-      <p>290 items across all three categories, each with its own image — so you always know exactly what you're trading.</p>
+      <p>290 items across all four categories, each with its own image — so you always know exactly what you're trading.</p>
     </div>
     <div class="cats">
       <div class="cat plush"><span class="emoji">🧸</span><b>Plushies</b><span>156 items</span></div>
       <div class="cat pod"><span class="emoji">🥔</span><b>Potato Pods</b><span>67 items</span></div>
-      <div class="cat artifact"><span class="emoji">🏺</span><b>Artifacts</b><span>67 items</span></div>
+      <div class="cat elderwood"><span class="emoji">🌳</span><b>Elderwood Relics</b><span>31 items</span></div>
+      <div class="cat rh"><span class="emoji">🏺</span><b>RH Relics</b><span>36 items</span></div>
     </div>
   </section>
 
@@ -302,10 +327,11 @@
       <h2>Everything, right in Discord</h2>
     </div>
     <div class="cmds">
-      <div class="cmd"><span class="tag">/trade</span><p>Post what you want and what you're offering — matching runs automatically.</p></div>
+      <div class="cmd"><span class="tag">/trade</span><p>Post up to 5 items you want and 5 you're offering — matching runs automatically, and you can run it again anytime to add more.</p></div>
       <div class="cmd"><span class="tag">/mylist</span><p>See your current offers and wants, with images, and clear anything out with a tap.</p></div>
       <div class="cmd"><span class="tag">/browse</span><p>Flip through the full catalog as a visual grid, with instant search.</p></div>
-      <div class="cmd"><span class="tag">/find</span><p>Look up one item by name and see its image right away.</p></div>
+      <div class="cmd"><span class="tag">/find</span><p>Pick a category, then jump straight to an item and see its image right away.</p></div>
+      <div class="cmd"><span class="tag">/clearlist</span><p>Wipe your entire want and offer list in one go — handy for starting fresh.</p></div>
     </div>
   </section>
 
@@ -315,7 +341,7 @@
     <div class="band">
       <h2>Your trading post is one click away</h2>
       <p>Add Palia Trade Post to your server and let your community start matching trades today.</p>
-      <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1549725979956486215&permissions=326417639424&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener">🧸 Add to Discord — it's free</a>
+      <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1549725979956486215&permissions=395137116160&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener">🧸 Add to Discord — it's free</a>
     </div>
   </section>
 
