@@ -197,11 +197,23 @@
 
   /* ---------- per-step demo clips ---------- */
   .step-clip{
-    margin-top:16px;border-radius:14px;overflow:hidden;
+    position:relative;margin-top:16px;border-radius:14px;overflow:hidden;
     border:1px solid var(--line);background:var(--cream);
-    aspect-ratio:16/10;
+    aspect-ratio:760/572;
   }
   .step-clip video,.step-clip img{display:block;width:100%;height:100%;object-fit:cover;}
+  .clip-play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:52px;height:52px;border-radius:50%;
+    background:rgba(20,15,15,0.5);border:none;color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;opacity:0;transition:opacity .2s ease;
+    padding:0;
+  }
+  .clip-play svg{width:24px;height:24px;}
+  .step-clip:hover .clip-play,
+  .step-clip:focus-within .clip-play,
+  .clip-play.is-paused{opacity:1;}
   .cmd{
     background:var(--card);border:1px solid var(--line);border-radius:16px;
     padding:20px;
@@ -283,9 +295,13 @@
         <h3>Post your list</h3>
         <p>Run <code>/trade</code> and pick up to 5 items you want and 5 you're offering, straight from autocomplete — no typos, no guessing names. Run it again anytime to add more, nothing gets overwritten.</p>
         <div class="step-clip">
-          <video autoplay muted loop playsinline>
+          <video muted loop playsinline preload="auto">
             <source src="step1.mp4" type="video/mp4">
           </video>
+          <button class="clip-play" aria-label="Play or pause">
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          </button>
         </div>
       </div>
       <div class="step">
@@ -368,3 +384,32 @@
     </a>
   </footer>
 </div>
+
+<script>
+  document.querySelectorAll('.step-clip').forEach(function (clip) {
+    var video = clip.querySelector('video');
+    var btn = clip.querySelector('.clip-play');
+    if (!video || !btn) { return; }
+    var playIcon = btn.querySelector('.icon-play');
+    var pauseIcon = btn.querySelector('.icon-pause');
+
+    function sync() {
+      if (video.paused) {
+        playIcon.style.display = '';
+        pauseIcon.style.display = 'none';
+        btn.classList.add('is-paused');
+      } else {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = '';
+        btn.classList.remove('is-paused');
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      if (video.paused) { video.play(); } else { video.pause(); }
+    });
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    sync();
+  });
+</script>
