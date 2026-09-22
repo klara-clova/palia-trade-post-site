@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Palia Trade Post</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B8%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF4E6;
+    --parchment:#FFEAD2;
+    --ink:#4A342A;
+    --ink-soft:#7A6153;
+    --rose:#FF8FBF;
+    --rose-deep:#E8659C;
+    --clay:#D9944F;
+    --sky:#7FA8E8;
+    --sage:#6FBE7E;
+    --lav:#A98FD6;
+    --card:#FFFFFF;
+    --line:rgba(74,52,42,0.12);
+    --shadow: 0 10px 30px -12px rgba(74,52,42,0.25);
+    --body-bg:var(--cream);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream:#2A1B33;
+      --parchment:#3A2445;
+      --ink:#F5E9F5;
+      --ink-soft:#CBA9D6;
+      --rose:#FF8FBF;
+      --rose-deep:#FF6FA8;
+      --clay:#E8A868;
+      --sky:#8FB6F2;
+      --sage:#7FE0A8;
+      --lav:#C9A2FF;
+      --card:#33213E;
+      --line:rgba(255,255,255,0.10);
+      --shadow: 0 10px 30px -12px rgba(0,0,0,0.55);
+      --body-bg:linear-gradient(160deg,#241729 0%,#2E1936 45%,#3E1E3E 100%);
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:#2A1B33;
+    --parchment:#3A2445;
+    --ink:#F5E9F5;
+    --ink-soft:#CBA9D6;
+    --rose:#FF8FBF;
+    --rose-deep:#FF6FA8;
+    --clay:#E8A868;
+    --sky:#8FB6F2;
+    --sage:#7FE0A8;
+    --lav:#C9A2FF;
+    --card:#33213E;
+    --line:rgba(255,255,255,0.10);
+    --shadow: 0 10px 30px -12px rgba(0,0,0,0.55);
+    --body-bg:linear-gradient(160deg,#241729 0%,#2E1936 45%,#3E1E3E 100%);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--body-bg);
+    color:var(--ink);
+    font-family:'Nunito',system-ui,sans-serif;
+    padding:0 20px;
+    overflow-x:hidden;
+    transition:background .3s ease,color .3s ease;
+  }
+  .theme-toggle{
+    display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;
+    border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;
+    font-size:1.05rem;box-shadow:var(--shadow);
+  }
+  a{color:inherit;}
+  h1,h2,h3{
+    font-family:'Baloo 2',system-ui,sans-serif;
+    font-weight:700;
+    text-wrap:balance;
+    margin:0;
+  }
+  .wrap{max-width:1040px;margin:0 auto;}
+  code, .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+
+  /* ---------- nav ---------- */
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 0;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Baloo 2';font-weight:700;font-size:1.15rem;}
+  .brand-badge{
+    width:36px;height:36px;border-radius:12px;
+    background:linear-gradient(145deg,var(--rose),var(--lav));
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.15rem;
+    box-shadow:var(--shadow);
+    flex:none;
+  }
+  .nav-cta{
+    background:var(--ink);color:var(--cream);
+    padding:9px 18px;border-radius:999px;
+    text-decoration:none;font-weight:700;font-size:.88rem;
+    white-space:nowrap;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:36px 0 64px;
+  }
+  .hero > div{max-width:640px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--parchment);
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:6px 14px;border-radius:999px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.08;}
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--rose-deep),var(--lav) 70%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{
+    color:var(--ink-soft);font-size:1.08rem;line-height:1.6;
+    margin:18px auto 26px;max-width:38ch;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:14px;
+    font-weight:700;font-size:1rem;text-decoration:none;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--ink);color:var(--cream);
+    box-shadow:var(--shadow);
+  }
+  .btn-primary:hover{opacity:.92;}
+  .btn-ghost{
+    color:var(--ink);border-color:var(--line);
+    background:var(--card);
+  }
+  .fine{color:var(--ink-soft);font-size:.82rem;margin:12px auto 0;max-width:34ch;}
+
+  /* sparkles scattered loosely around the page */
+  .drift{position:relative;}
+  .drift-sparkle{
+    position:absolute;font-size:1.15rem;opacity:.6;
+    animation:float 5.5s ease-in-out infinite;pointer-events:none;
+  }
+  @media (max-width:760px){ .drift-sparkle{display:none;} }
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-10px) rotate(8deg);}
+  }
+  @media (prefers-reduced-motion: reduce){ .sparkle{animation:none;} }
+
+  /* ---------- section shell ---------- */
+  section{padding:56px 0;}
+  .section-head{max-width:56ch;margin-bottom:36px;}
+  .kicker{
+    color:var(--rose-deep);font-weight:800;font-size:.8rem;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:block;
+  }
+  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:10px;}
+  .section-head p{color:var(--ink-soft);font-size:1.02rem;line-height:1.6;}
+
+  /* ---------- how it works ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;}
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:24px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+  }
+  .step-num{
+    width:38px;height:38px;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Baloo 2';font-weight:700;color:#fff;margin-bottom:16px;
+  }
+  .step:nth-child(1) .step-num{background:var(--rose-deep);}
+  .step:nth-child(2) .step-num{background:var(--clay);}
+  .step:nth-child(3) .step-num{background:var(--sage);}
+  .step h3{font-size:1.1rem;margin-bottom:8px;}
+  .step p{color:var(--ink-soft);font-size:.95rem;line-height:1.55;margin:0;flex:1 0 auto;}
+
+  /* ---------- categories ---------- */
+  .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .cat{
+    border-radius:18px;padding:22px;color:#fff;
+    display:flex;flex-direction:column;gap:6px;
+    box-shadow:var(--shadow);
+  }
+  .cat.plush{background:linear-gradient(150deg,#FF9AC7,#E8659C);}
+  .cat.pod{background:linear-gradient(150deg,#E5B27A,#C8863F);}
+  .cat.elderwood{background:linear-gradient(150deg,#8FE0A8,#4E9E65);}
+  .cat.rh{background:linear-gradient(150deg,#C9AEF2,#8F5FD1);}
+  .cat-icon{
+    width:44px;height:44px;border-radius:14px;
+    background:rgba(255,255,255,.22);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:2px;
+  }
+  .cat-icon svg{width:24px;height:24px;}
+  .cat b{font-family:'Baloo 2';font-size:1.05rem;}
+  .cat span{font-size:.85rem;opacity:.92;}
+
+  /* ---------- commands ---------- */
+  .cmds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;}
+
+  /* ---------- per-step demo clips ---------- */
+  .step-clip{
+    margin-top:16px;border-radius:14px;overflow:hidden;
+    border:1px solid var(--line);background:var(--cream);
+    aspect-ratio:16/10;
+  }
+  .step-clip video,.step-clip img{display:block;width:100%;height:100%;object-fit:cover;}
+  .cmd{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:20px;
+  }
+  .cmd .tag{
+    display:inline-block;font-family:'JetBrains Mono';font-size:.86rem;font-weight:700;
+    background:var(--parchment);color:var(--rose-deep);
+    padding:4px 10px;border-radius:8px;margin-bottom:10px;
+  }
+  .cmd p{color:var(--ink-soft);font-size:.9rem;line-height:1.5;margin:0;}
+
+  /* ---------- cta band ---------- */
+  .band{
+    background:linear-gradient(120deg,var(--rose) 0%,var(--lav) 100%);
+    border-radius:28px;padding:48px 36px;text-align:center;color:#fff;
+    box-shadow:var(--shadow);
+  }
+  .band h2{font-size:clamp(1.5rem,3.4vw,2.2rem);margin-bottom:12px;color:#fff;}
+  .band p{opacity:.95;max-width:48ch;margin:0 auto 26px;line-height:1.6;}
+  .band .btn-primary{background:#fff;color:var(--rose-deep);box-shadow:none;}
+  .band .btn-ghost{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.6);}
+
+  footer{
+    padding:36px 0 48px;color:var(--ink-soft);font-size:.85rem;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  }
+  footer > span{flex:1 1 240px;min-width:0;}
+  .footer-links{display:flex;gap:10px;flex-wrap:wrap;}
+  .footer-kofi{
+    display:inline-flex;align-items:center;gap:8px;
+    color:#fff;text-decoration:none;font-weight:700;
+    background:linear-gradient(135deg,var(--rose),var(--rose-deep));
+    padding:8px 16px;border-radius:999px;font-size:.85rem;
+    white-space:nowrap;
+  }
+  .footer-support{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--ink);text-decoration:none;font-weight:700;
+    background:var(--parchment);border:1px solid var(--line);
+    padding:8px 16px;border-radius:999px;font-size:.85rem;
+    white-space:nowrap;
+  }
+  .footer-support svg{width:16px;height:16px;flex:none;}
+
+  @media (max-width:760px){
+    .steps,.cats,.cmds{grid-template-columns:1fr;}
+    nav{padding:18px 0;}
+    section{padding:40px 0;}
+    .hero{padding:24px 0 44px;}
+    .band{padding:36px 22px;}
+    footer{flex-direction:column;align-items:stretch;text-align:left;}
+    footer > span,.footer-links{width:100%;flex:0 0 auto;}
+    .footer-support,.footer-kofi{white-space:normal;}
+  }
+  @media (max-width:420px){
+    body{padding:0 16px;}
+    .btn{padding:13px 20px;font-size:.95rem;}
+  }
+
+  .kofi-float{
+    position:fixed;left:20px;bottom:20px;z-index:999;
+    display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,var(--rose),var(--rose-deep));
+    color:#fff;text-decoration:none;font-weight:700;font-size:.85rem;
+    padding:12px 20px;border-radius:999px;
+    box-shadow:0 8px 22px -6px rgba(232,101,156,0.55);
+    animation:kofiFloat 3.2s ease-in-out infinite;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .kofi-float:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 26px -6px rgba(232,101,156,0.65);
+  }
+  @keyframes kofiFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-6px);}
+  }
+  @media (prefers-reduced-motion: reduce){ .kofi-float{animation:none;} }
+  @media (max-width:420px){
+    .kofi-float{left:14px;bottom:14px;padding:10px 16px;font-size:.8rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="brand"><span class="brand-badge">🧸</span> Palia Trade Post</div>
+    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">🌙</button>
+  </nav>
+
+  <section class="hero drift">
+    <span class="drift-sparkle" style="top:6%;left:2%;animation-delay:0s;">✨</span>
+    <span class="drift-sparkle pastel" style="color:var(--rose);top:2%;right:6%;animation-delay:1.4s;font-size:1rem;">★</span>
+    <span class="drift-sparkle" style="bottom:10%;left:8%;animation-delay:2.5s;font-size:1.1rem;">💫</span>
+    <span class="drift-sparkle pastel" style="color:var(--lav);top:40%;right:1%;animation-delay:.8s;font-size:.9rem;">★</span>
+    <span class="drift-sparkle" style="bottom:0%;right:20%;animation-delay:3.1s;">⭐</span>
+    <span class="drift-sparkle pastel" style="color:var(--sky);top:16%;left:22%;animation-delay:1.9s;font-size:.85rem;">★</span>
+    <div>
+      <span class="eyebrow">🐾 A Discord bot for Palia traders</span>
+      <h1>Stop shouting your <em>have/want</em> list in chat.</h1>
+      <p>List what you're offering and what you're after — Plushies, Potato Pods, Elderwood Relics and RH Relics alike — and Palia Trade Post finds a real two-way match, opens a private thread just for the two of you, and cleans everything up once you're done.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1549725979956486215&permissions=395137116288&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener">🧸 Add to your server</a>
+        <a class="btn btn-ghost" href="https://app.paliatrade.org" target="_blank" rel="noopener">🌐 Try the web dashboard</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="fine">Free · Works on any server · No setup required</p>
+    </div>
+  </section>
+
+  <section id="how" class="drift">
+    <span class="drift-sparkle" style="top:2%;left:-1%;animation-delay:.4s;">✨</span>
+    <span class="drift-sparkle" style="top:60%;right:1%;animation-delay:2.3s;font-size:.9rem;">⭐</span>
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Three steps to your next trade</h2>
+      <p>No spreadsheets, no re-posting your list every week. Tell the bot once, and it keeps watching.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Post your list</h3>
+        <p>Run <code>/trade</code> and pick up to 5 items you want and 5 you're offering, straight from autocomplete — no typos, no guessing names. Run it again anytime to add more, nothing gets overwritten.</p>
+        <div class="step-clip">
+          <video autoplay muted loop playsinline>
+            <source src="step1.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Get matched instantly</h3>
+        <p>The moment there's a real two-way match — you have what they want, and they have what you want — you're both pinged in a private thread only the two of you can see, with images of exactly what's changing hands.</p>
+        <div class="step-clip">
+          <img src="step2.png" alt="Two matching /trade postings, ready to be paired up" loading="lazy">
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Trade &amp; close it out</h3>
+        <p>Sort the trade out in-game, then tap <strong>Mark as completed</strong> — the items clear from both your lists, and the thread and your original posts disappear automatically.</p>
+        <div class="step-clip">
+          <img src="step3.png" alt="Match found notification with a Mark as completed button" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="drift">
+    <span class="drift-sparkle" style="top:10%;right:2%;animation-delay:1.1s;font-size:1.3rem;">💫</span>
+    <span class="drift-sparkle" style="bottom:4%;left:0%;animation-delay:3s;">🌟</span>
+    <div class="section-head">
+      <span class="kicker">Full catalog</span>
+      <h2>Every collectible, covered</h2>
+      <p>290 items across all four categories, each with its own image — so you always know exactly what you're trading.</p>
+    </div>
+    <div class="cats">
+      <div class="cat plush">
+        <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.2" cy="6.3" r="2.1"/><circle cx="16.8" cy="6.3" r="2.1"/><circle cx="12" cy="13.2" r="6.8"/><circle cx="9.3" cy="12.6" r=".55" fill="#fff" stroke="none"/><circle cx="14.7" cy="12.6" r=".55" fill="#fff" stroke="none"/><path d="M10 15.6c1.3.9 2.7.9 4 0"/></svg></span>
+        <b>Plushies</b><span>156 items</span>
+      </div>
+      <div class="cat pod">
+        <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1.1-6-4.7-6-8.6C6 7.3 8.4 3 12 3s6 4.3 6 9.4c0 3.9-2 7.5-6 8.6Z"/><path d="M12 3c0-1.1.8-2 2-2"/><path d="M9 12.2c1.2.8 3.8.8 5 0"/></svg></span>
+        <b>Potato Pods</b><span>67 items</span>
+      </div>
+      <div class="cat elderwood">
+        <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 7.3 10.5h2.9L6.5 18h4.4v3h2.2v-3h4.4l-3.7-7.5h2.9Z"/></svg></span>
+        <b>Elderwood Relics</b><span>31 items</span>
+      </div>
+      <div class="cat rh">
+        <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5"/><path d="M10.5 3v2.2c0 1-1.3 1.4-2.4 2.5C6.8 8.9 6.2 10.6 6.2 12.7V18a3 3 0 0 0 3 3h5.6a3 3 0 0 0 3-3v-5.3c0-2.1-.6-3.8-1.9-5-1.1-1.1-2.4-1.5-2.4-2.5V3"/><path d="M8.2 14.2h7.6"/></svg></span>
+        <b>RH Relics</b><span>36 items</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="drift">
+    <span class="drift-sparkle" style="top:0%;left:3%;animation-delay:.9s;font-size:1rem;">⭐</span>
+    <div class="section-head">
+      <span class="kicker">Commands</span>
+      <h2>Everything, right in Discord</h2>
+    </div>
+    <div class="cmds">
+      <div class="cmd"><span class="tag">/trade</span><p>Post up to 5 items you want and 5 you're offering — matching runs automatically, and you can run it again anytime to add more.</p></div>
+      <div class="cmd"><span class="tag">/mylist</span><p>See your current offers and wants, with images, and clear anything out with a tap.</p></div>
+      <div class="cmd"><span class="tag">/browse</span><p>Flip through the full catalog as a visual grid, with instant search.</p></div>
+      <div class="cmd"><span class="tag">/find</span><p>Pick a category, then jump straight to an item and see its image right away.</p></div>
+      <div class="cmd"><span class="tag">/clearlist</span><p>Wipe your entire want and offer list in one go — handy for starting fresh.</p></div>
+    </div>
+  </section>
+
+  <section class="drift">
+    <span class="drift-sparkle" style="top:8%;left:8%;animation-delay:1.6s;opacity:.85;">✨</span>
+    <span class="drift-sparkle" style="bottom:10%;right:9%;animation-delay:.3s;opacity:.85;font-size:1.3rem;">💫</span>
+    <div class="band">
+      <h2>Your trading post is one click away</h2>
+      <p>Add Palia Trade Post to your server and let your community start matching trades today.</p>
+      <div class="hero-ctas" style="justify-content:center;margin-top:18px;">
+        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1549725979956486215&permissions=395137116288&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener">🧸 Add to Discord — it's free</a>
+        <a class="btn btn-ghost" href="https://app.paliatrade.org" target="_blank" rel="noopener">🌐 Try the web dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>🐾 Palia Trade Post — an independent fan project, not affiliated with Singularity 6.</span>
+    <div class="footer-links">
+    <a class="footer-support" href="https://discord.gg/JA4WKumGhw" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.522 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+      Support &amp; help — bugs, questions, all in one place
+    </a>
+    </div>
+  </footer>
+</div>
+
+<a href="https://ko-fi.com/paliatradepost?ref=float" target="_blank" rel="noopener" class="kofi-float">☕ Support me on Ko-fi</a>
+
+<script>
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  var btn = document.getElementById("themeToggle");
+  if (btn) btn.textContent = theme === "dark" ? "☀️" : "🌙";
+}
+function toggleTheme() {
+  var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  var next = current === "dark" ? "light" : "dark";
+  try { localStorage.setItem("palia-theme", next); } catch (e) {}
+  applyTheme(next);
+}
+(function initTheme() {
+  var saved = null;
+  try { saved = localStorage.getItem("palia-theme"); } catch (e) {}
+  var preferred = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  applyTheme(preferred);
+})();
+</script>
+
+</body>
+</html>
